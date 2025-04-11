@@ -35,7 +35,7 @@ jobs:
           perl -V
           perl Makefile.PL
           make
-          make test
+          AUTOMATED_TESTING=1 make test
 
     # Regular OS testing path
     - name: Set up Perl
@@ -55,6 +55,8 @@ jobs:
         
     - name: Build and test
       if: ${{ !matrix.freebsd }}
+      env:
+        AUTOMATED_TESTING: 1
       run: |
         perl Makefile.PL
         make
