@@ -240,7 +240,7 @@ of the time.
 
 ## Week Number
 
-The _week number_ may be an unknown concept to some readers.  The ISO
+The _week number_ may be an known concept to some readers.  The ISO
 8601 standard defines that weeks begin on a Monday and week 1 of the
 year is the week that includes both January 4th and the first Thursday
 of the year.  In other words, if the first Monday of January is the
@@ -337,12 +337,12 @@ For development and testing:
    git commit -m "Implement Windows-specific fixes"
    ```
 
-3. **Push to GitHub to trigger tests**:
+3. **Push to GitHub to trigger automatic tests**:
    ```bash
    git push origin feature/windows-fix
    ```
 
-4. **Delete when done**:
+4. **Delete once merge done**:
    ```bash
    # Delete locally
    git branch -D feature/windows-fix

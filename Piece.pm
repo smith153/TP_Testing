@@ -1114,7 +1114,7 @@ of the time.
 
 =head2 Week Number
 
-The I<week number> may be an unknown concept to some readers.  The ISO
+The I<week number> may be an known concept to some readers.  The ISO
 8601 standard defines that weeks begin on a Monday and week 1 of the
 year is the week that includes both January 4th and the first Thursday
 of the year.  In other words, if the first Monday of January is the
