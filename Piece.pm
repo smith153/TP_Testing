@@ -1179,7 +1179,7 @@ as Perl.
 
 =head1 SEE ALSO
 
-The excellent Calendar FAQ at L<http://www.tondering.dk/claus/calendar.html>
+The excellent Calendar FAQ at L<http://www.tondering.dk/claus/calendar.html>!
 
 =head1 BUGS
 
