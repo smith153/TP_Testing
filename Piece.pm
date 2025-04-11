@@ -1167,7 +1167,7 @@ into the strftime function provided by the POSIX module
 
 =head1 AUTHOR
 
-Matt Sergeant, matt@sergeant.org
+Matt Sergeant, matt@sergeant.org, me
 Jarkko Hietaniemi, jhi@iki.fi (while creating Time::Piece for core perl)
 
 =head1 COPYRIGHT AND LICENSE

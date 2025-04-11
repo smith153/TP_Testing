@@ -293,7 +293,7 @@ into the strftime function provided by the POSIX module
 
 # AUTHOR
 
-Matt Sergeant, matt@sergeant.org
+Matt Sergeant, matt@sergeant.org, me
 Jarkko Hietaniemi, jhi@iki.fi (while creating Time::Piece for core perl)
 
 # COPYRIGHT AND LICENSE
@@ -367,7 +367,3 @@ make
 make test
 make install
 ```
-
-## License
-
-This module is available under the same license as Perl itself.
