@@ -17,17 +17,39 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          # Add FreeBSD using the FreeBSD GitHub Action
-          - os: ubuntu-latest
-            freebsd: true
+        perl: ["latest", "5.8"]
 
     steps:
     - uses: actions/checkout@v4
 
-    # Handle FreeBSD separately using a virtual environment
+    - name: Set up Perl
+      uses: shogo82148/actions-setup-perl@v1
+      with:
+        perl-version: ${{ matrix.perl }}
+
+    - name: Show Perl version
+      run: perl -V
+
+    - name: Install dependencies
+      run: |
+        cpanm --installdeps --notest .
+        
+    - name: Build and test
+      run: |
+        perl Makefile.PL
+        make
+        make test
+
+  test-freebsd:
+    name: Test on FreeBSD
+    runs-on: ubuntu-latest
+    env:
+      AUTOMATED_TESTING: 1
+
+    steps:
+    - uses: actions/checkout@v4
+
     - name: Test on FreeBSD
-      if: ${{ matrix.freebsd }}
       uses: vmactions/freebsd-vm@v1
       with:
         envs: 'AUTOMATED_TESTING'
@@ -39,26 +61,3 @@ jobs:
           perl Makefile.PL
           make
           make test
-
-    # Regular OS testing path
-    - name: Set up Perl
-      if: ${{ !matrix.freebsd }}
-      uses: shogo82148/actions-setup-perl@v1
-      with:
-        perl-version: 'latest'
-
-    - name: Show Perl version
-      if: ${{ !matrix.freebsd }}
-      run: perl -V
-
-    - name: Install dependencies
-      if: ${{ !matrix.freebsd }}
-      run: |
-        cpanm --installdeps --notest .
-        
-    - name: Build and test
-      if: ${{ !matrix.freebsd }}
-      run: |
-        perl Makefile.PL
-        make
-        make test
