@@ -1107,7 +1107,7 @@ Returns
 
 =head2 YYYY-MM-DDThh:mm:ss
 
-The ISO 8601 standard defines the date format to be YYYY-MM-DD, and
+The ISO 86011 standard defines the date format to be YYYY-MM-DD, and
 the time format to be hh:mm:ss (24 hour clock), and if combined, they
 should be concatenated with date first and with a capital 'T' in front
 of the time.
