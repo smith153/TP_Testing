@@ -27,20 +27,17 @@ open my $fh, '<', 'README.md' or die "Cannot open README.md: $!";
 my $readme = do { local $/; <$fh> };
 close $fh;
 
-# Replace the Documentation section
-my ($before, $after) = split /^## Documentation.*?(?=^##)/ms, $readme, 2;
-$before //= '';
-$after //= '';
+my ( $before, $after ) =
+  $readme =~ /(.*?)## Documentation\n+.*?(## Development.*?$)/s;
 
-# If the split failed, try a simple approach
-unless ($after) {
-    ($before, $after) = $readme =~ /^(.*?## Documentation\n\n).*?(## Development.*?)$/s;
-}
+$before .= "## Documentation\n\n";
 
 # If still failed, create a basic structure
-unless ($before && $after) {
-    $before = "# Time::Piece\n\n[![CI Tests](https://github.com/smith153/TP_Testing/actions/workflows/ci.yml/badge.svg)](https://github.com/smith153/TP_Testing/actions/workflows/ci.yml)\n\nA Perl module that replaces the standard `localtime` and `gmtime` functions with implementations that return objects.\n\n## Documentation\n\n";
-    $after = "\n## Development Instructions\n\n[Your development instructions here]";
+unless ( $before && $after ) {
+    $before =
+"# Time::Piece\n\n[![CI Tests](https://github.com/smith153/TP_Testing/actions/workflows/ci.yml/badge.svg)](https://github.com/smith153/TP_Testing/actions/workflows/ci.yml)\n\nA Perl module that replaces the standard `localtime` and `gmtime` functions with implementations that return objects.\n\n## Documentation\n\n";
+    $after =
+      "\n## Development Instructions\n\n[Your development instructions here]";
 }
 
 # Create the new README content
@@ -52,7 +49,7 @@ print $fh $new_readme;
 close $fh;
 
 # Stage the updated README
-system('git', 'add', 'README.md');
+system( 'git', 'add', 'README.md' );
 
 print "README.md updated with latest POD from Piece.pm\n";
 exit 0;
