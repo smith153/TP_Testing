@@ -31,7 +31,7 @@ Larry Wall on the perl5-porters mailing list here:
 
 # USAGE
 
-After importing this module, when you use localtime or gmtime in a scalar
+After importing or 'using'  this module, when you use localtime or gmtime in a scalar
 context, rather than getting an ordinary scalar string representing the
 date and time, you get a Time::Piece object, whose stringification happens
 to produce the same effect as the localtime and gmtime functions. There is 
