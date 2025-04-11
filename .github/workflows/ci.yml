@@ -11,6 +11,8 @@ jobs:
   test:
     name: Test on ${{ matrix.os }} with Perl ${{ matrix.perl }}
     runs-on: ${{ matrix.os }}
+    env:
+      AUTOMATED_TESTING: 1
     strategy:
       fail-fast: false
       matrix:
@@ -21,13 +23,14 @@ jobs:
             freebsd: true
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     # Handle FreeBSD separately using a virtual environment
     - name: Test on FreeBSD
       if: ${{ matrix.freebsd }}
-      uses: vmactions/freebsd-vm@v0
+      uses: vmactions/freebsd-vm@v1
       with:
+        envs: 'AUTOMATED_TESTING'
         usesh: true
         prepare: |
           pkg install -y perl5 p5-App-cpanminus
@@ -35,7 +38,7 @@ jobs:
           perl -V
           perl Makefile.PL
           make
-          AUTOMATED_TESTING=1 make test
+          make test
 
     # Regular OS testing path
     - name: Set up Perl
@@ -55,8 +58,6 @@ jobs:
         
     - name: Build and test
       if: ${{ !matrix.freebsd }}
-      env:
-        AUTOMATED_TESTING: 1
       run: |
         perl Makefile.PL
         make
