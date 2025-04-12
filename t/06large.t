@@ -29,6 +29,7 @@ TODO: {
     $base_year = $t->year;
 
     for ( 1 .. 200 ) {
+        warn "year is: $t->[5] day is: $t->[3]\n";
         $t = $t - $one_year;
         cmp_ok(
             $t->year, '==',
