@@ -6,8 +6,7 @@ use Time::Seconds;
 # somewhat silly, but lets see what happens
 
 
-plan skip_all => "Large time tests not required for installation"
-  unless ( $ENV{AUTOMATED_TESTING} );
+plan skip_all => "Large time tests not required for installation"  unless ( $ENV{AUTOMATED_TESTING} );
 
 TODO: {
     local $TODO = "Big dates will probably fail on some platforms";
