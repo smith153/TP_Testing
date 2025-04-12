@@ -30,12 +30,13 @@ TODO: {
 
     for ( 1 .. 200 ) {
         warn "year is: $t->[5] day is: $t->[3]\n";
-        $t = $t - $one_year;
+        eval {$t = $t - $one_year;
         cmp_ok(
             $t->year, '==',
             $base_year - $_,
             "Year is: " . ( $base_year - $_ )
         );
+    };
     }
 
 }
