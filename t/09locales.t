@@ -1,9 +1,10 @@
-use Test::More;
+use Test::More tests => 154;
 use Time::Piece;
 
 # Skip if doing a regular install
 # These are mostly for reverse parsing tests, not required for installation
-plan (skip_all => "Reverse parsing not required for installation") unless ( $ENV{AUTOMATED_TESTING} );
+plan skip_all => "Reverse parsing not required for installation"
+  unless ( $ENV{AUTOMATED_TESTING} );
 
 my $t = gmtime(1373371631);    # 2013-07-09T12:07:11
 
@@ -106,5 +107,3 @@ for my $time (
     }
 
 }
-
-done_testing(154);
