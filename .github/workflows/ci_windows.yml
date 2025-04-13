@@ -1,0 +1,41 @@
+name: Windows CI Tests
+
+on:
+  push:
+    branches: [ main, master, dev_test_*, feature/* ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  test-windows:
+    name: Test on Windows with Perl ${{ matrix.perl-version }}
+    runs-on: ['windows-latest', 'windows-2019']
+    env:
+      AUTOMATED_TESTING: 1
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version: ['5.12', '5.14', '5.16', 'latest']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Strawberry Perl
+      uses: shogo82148/actions-setup-perl@v1
+      with:
+        perl-version: ${{ matrix.perl-version }}
+
+    - name: Show Perl version and configuration
+      run: |
+        perl -V
+
+    - name: Install dependencies
+      run: |
+        cpanm --installdeps --notest .
+        
+    - name: Build and test
+      run: |
+        perl Makefile.PL
+        perl -MConfig -e 'system $Config{make}'
+        perl -MConfig -e 'system ($Config{make}, "test")'
