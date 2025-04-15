@@ -37,8 +37,8 @@ jobs:
     - name: Build and test
       run: |
         perl Makefile.PL
-        perl -MConfig -e 'system $Config{make}'
-        perl -MConfig -e 'system ($Config{make}, "test")'
+        make
+        make test
 
   test-freebsd:
     name: Test on FreeBSD
