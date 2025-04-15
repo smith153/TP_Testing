@@ -20,9 +20,9 @@ jobs:
         perl: ["latest", "5.8", "5.10.1", '5.12', '5.14', '5.16']
         exclude:
           - os: windows-latest
-            perl-version: '5.8'
+            perl: '5.8'
           - os: [windows-latest, windows-2019]
-            perl-version: '5.10'
+            perl: '5.10'
 
 
     steps:
