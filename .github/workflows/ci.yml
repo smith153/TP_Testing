@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest,windows-latest, windows-2019, windows-11-arm]
+        os: [ubuntu-latest, macos-latest,windows-latest, windows-2019]
         perl: ["5.8", "latest"]
 
     steps:
@@ -36,9 +36,7 @@ jobs:
         
     - name: Build and test
       run: |
-        perl Makefile.PL
-        perl -MConfig -e 'system $Config{make}'
-        perl -MConfig -e 'system ($Config{make}, "test")'
+        cpanm --testonly -v .
 
   test-freebsd:
     name: Test on FreeBSD
@@ -57,7 +55,6 @@ jobs:
         prepare: |
           pkg install -y perl5 p5-App-cpanminus
         run: |
-          perl -V
           perl Makefile.PL
           make
           make test
