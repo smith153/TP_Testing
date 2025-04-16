@@ -36,7 +36,7 @@ jobs:
         
     - name: Build and test
       run: |
-        cpanm --testonly -v .
+        cpanm --test-only -v .
 
   test-freebsd:
     name: Test on FreeBSD
