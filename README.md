@@ -1,6 +1,8 @@
 # Time::Piece
 
 [![CI Tests](https://github.com/smith153/TP_Test/actions/workflows/ci.yml/badge.svg)](https://github.com/smith153/TP_Test/actions/workflows/ci.yml)
+![CI Tests](https://github.com/smith153/TP_Test/actions/workflows/ci.yml/badge.svg?branch=main)
+[![CI Tests](https://github.com/smith153/TP_Test/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/smith153/TP_Testing/actions)
 
 A Perl module that replaces the standard `localtime` and `gmtime` functions with implementations that return objects.
 
