@@ -6,7 +6,7 @@ use Test::More tests => 56;
 plan skip_all => "DST tests not required for installation"
   unless ( $ENV{AUTOMATED_TESTING} );
 
-my $is_win32 = ($^O =~ /Win32/);
+my $is_win32 = 0;
 my $is_qnx = ($^O eq 'qnx');
 my $is_vos = ($^O eq 'vos');
 my $is_linux = ($^O =~ /linux/);
