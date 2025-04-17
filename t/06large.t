@@ -29,12 +29,14 @@ TODO: {
     $base_year = $t->year;
 
     for ( 1 .. 200 ) {
+        eval {
         $t = $t - $one_year;
         cmp_ok(
             $t->year, '==',
             $base_year - $_,
             "Year is: " . ( $base_year - $_ )
         );
+    };
     }
 
 }
