@@ -1,5 +1,4 @@
-use Test::More tests => 56;
-
+use Test::More;
 
 # Skip if doing a regular install
 # Avoids mystery DST bugs [rt 128240], [GH40]
@@ -141,3 +140,5 @@ SKIP: {
     like  ($lt->strftime("%z"), qr/-0500|EST/);
     is    ($lt->strftime("%s"), 1357733231, 'Epoch output is the same with EST');
 }
+
+done_testing(56);
