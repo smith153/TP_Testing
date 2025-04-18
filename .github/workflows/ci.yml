@@ -43,7 +43,7 @@ jobs:
     name: Test on BSD
     runs-on: ubuntu-latest
     # 'false' to disable BSD tests
-    if: false
+    if: true
     env:
       AUTOMATED_TESTING: 1
 
