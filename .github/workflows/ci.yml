@@ -7,8 +7,6 @@ on:
     branches: [ main, master ]
   workflow_dispatch:  # Allow manual triggering
 
-env:
-  RUN_FREEBSD_TESTS: false  # Slow and eats usage limits
 
 jobs:
   test:
@@ -44,8 +42,7 @@ jobs:
   test-freebsd:
     name: Test on FreeBSD
     runs-on: ubuntu-latest
-    # Only run if the RUN_FREEBSD_TESTS flag is true
-    if: ${{ env.RUN_FREEBSD_TESTS == 'true' }}
+    if: false
     env:
       AUTOMATED_TESTING: 1
 
@@ -57,8 +54,6 @@ jobs:
       with:
         envs: 'AUTOMATED_TESTING'
         usesh: true
-        prepare: |
-          pkg install -y perl5 p5-App-cpanminus
         run: |
           perl Makefile.PL
           make
