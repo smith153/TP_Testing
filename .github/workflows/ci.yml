@@ -55,6 +55,9 @@ jobs:
       with:
         envs: 'AUTOMATED_TESTING'
         usesh: true
+        copyback: false
+        prepare: |
+          perl -V
         run: |
           perl Makefile.PL
           make test
