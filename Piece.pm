@@ -484,8 +484,9 @@ my $strftime_trans_map = {
         return $format;
     },
     'e' => sub {
-        my ( $format ) = @_;
-        #$format =~ s/%e/%d/ if $IS_WIN32;
+        my ( $format, $time ) = @_;
+        my $day = sprintf( "%02d", $time->[c_mday] );
+        $format =~ s/%e/$day/ if $IS_WIN32;
         return $format;
     },
     'D' => sub {
