@@ -485,7 +485,7 @@ my $strftime_trans_map = {
     },
     'e' => sub {
         my ( $format ) = @_;
-        $format =~ s/%e/%d/ if $IS_WIN32;
+        #$format =~ s/%e/%d/ if $IS_WIN32;
         return $format;
     },
     'D' => sub {
