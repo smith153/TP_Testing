@@ -1,4 +1,4 @@
-use Test::More tests => 154;
+use Test::More;
 use Time::Piece;
 
 # Skip if doing a regular install
@@ -107,3 +107,5 @@ for my $time (
     }
 
 }
+
+done_testing(154);

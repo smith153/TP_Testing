@@ -13,7 +13,7 @@ jobs:
     name: Test on ${{ matrix.os }} with Perl ${{ matrix.perl }}
     runs-on: ${{ matrix.os }}
     env:
-      AUTOMATED_TESTING: 1
+      AUTOMATED_TESTING: 0
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +45,7 @@ jobs:
     # 'false' to disable BSD tests
     if: true
     env:
-      AUTOMATED_TESTING: 1
+      AUTOMATED_TESTING: 0
 
     steps:
     - uses: actions/checkout@v4
