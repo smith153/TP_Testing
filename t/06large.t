@@ -10,8 +10,6 @@ my $is_win32 = ( $^O =~ /Win32/ );
 plan skip_all => "Large time tests not required for installation"
   unless ( $ENV{AUTOMATED_TESTING} && !( $is_win32 && $] < 5.012 ) );
 
-plan tests => 250;
-
 my $t = gmtime;
 
 my $base_year = $t->year;
@@ -37,3 +35,5 @@ for ( 1 .. 200 ) {
         "Year is: " . ( $base_year - $_ )
     );
 }
+
+done_testing(250);
