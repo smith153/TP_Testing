@@ -5,9 +5,13 @@ use Time::Seconds;
 # Large tests - test dates outside of the epoch range,
 # somewhat silly, but lets see what happens
 
+my $is_win32 = ( $^O =~ /Win32/ );
 
 plan skip_all => "Large time tests not required for installation"
   unless ( $ENV{AUTOMATED_TESTING} );
+
+plan skip_all => "64bit time unsupported on Win32 with perl < 5.12"
+  if ( $is_win32 && $] < 5.012 );
 
 TODO: {
     local $TODO = "Big dates will probably fail on some platforms";
