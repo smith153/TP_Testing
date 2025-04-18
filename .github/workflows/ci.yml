@@ -42,7 +42,8 @@ jobs:
   test-freebsd:
     name: Test on FreeBSD
     runs-on: ubuntu-latest
-    if: false
+    # 'false' to disable FreeBSD tests
+    if: true
     env:
       AUTOMATED_TESTING: 1
 
@@ -54,7 +55,8 @@ jobs:
       with:
         envs: 'AUTOMATED_TESTING'
         usesh: true
+        prepare: |
+          perl -V
         run: |
           perl Makefile.PL
-          make
           make test
