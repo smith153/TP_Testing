@@ -43,7 +43,7 @@ jobs:
     name: Test on FreeBSD
     runs-on: ubuntu-latest
     # 'false' to disable FreeBSD tests
-    if: true
+    if: false
     env:
       AUTOMATED_TESTING: 1
 

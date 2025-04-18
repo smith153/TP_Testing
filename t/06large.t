@@ -8,7 +8,7 @@ use Time::Seconds;
 my $is_win32 = ( $^O =~ /Win32/ );
 
 plan skip_all => "Large time tests not required for installation"
-  unless ( $ENV{AUTOMATED_TESTING} && !( $is_win32 && $] < 5.012 ) );
+  unless ( $ENV{AUTOMATED_TESTING}  );
 
 my $t = gmtime;
 
