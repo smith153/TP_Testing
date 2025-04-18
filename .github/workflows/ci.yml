@@ -39,10 +39,10 @@ jobs:
       run: |
         cpanm --test-only -v .
 
-  test-freebsd:
-    name: Test on FreeBSD
+  test-bsd:
+    name: Test on BSD
     runs-on: ubuntu-latest
-    # 'false' to disable FreeBSD tests
+    # 'false' to disable BSD tests
     if: false
     env:
       AUTOMATED_TESTING: 1
@@ -50,7 +50,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Test on FreeBSD
+    - name: Test on BSD
       uses: vmactions/openbsd-vm@v1
       with:
         envs: 'AUTOMATED_TESTING'

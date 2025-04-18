@@ -5,10 +5,11 @@ use Time::Seconds;
 # Large tests - test dates outside of the epoch range,
 # somewhat silly, but lets see what happens
 
+# Won't run without time64 support (perl > 5.10) on windows
 my $is_win32 = ( $^O =~ /Win32/ );
 
 plan skip_all => "Large time tests not required for installation"
-  unless ( $ENV{AUTOMATED_TESTING}  );
+  unless ( $ENV{AUTOMATED_TESTING} && !( $is_win32 && $] < 5.012 ) );
 
 my $t = gmtime;
 
