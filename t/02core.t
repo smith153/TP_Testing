@@ -1,4 +1,4 @@
-use Test::More tests => 100;
+use Test::More tests => 102;
 
 my $is_qnx = ($^O eq 'qnx');
 my $is_vos = ($^O eq 'vos');
@@ -70,19 +70,21 @@ cmp_ok($t->week, '==', 9);
 cmp_ok($t->strftime('%d'), '==', 29);
 
 cmp_ok($t->strftime('%D'), 'eq', '02/29/00'); # Yech!
-cmp_ok($t->strftime('%e'), 'eq', '29');       # should test with < 10
+cmp_ok($t->strftime('%e'), 'eq', '29');
 
 # %h is locale-dependent
-cmp_ok($t->strftime('%H'), 'eq', '13'); # should test with < 10
+cmp_ok($t->strftime('%H'), 'eq', '13');
+cmp_ok($t->strftime('%k'), 'eq', '13');
 
-cmp_ok($t->strftime('%I'), 'eq', '01'); # should test with < 10
+cmp_ok($t->strftime('%I'), 'eq', '01');
+cmp_ok($t->strftime('%l'), 'eq', ' 1');
 cmp_ok($t->strftime('%j'), '==',  60 ); # why ->yday+1 ?
 cmp_ok($t->strftime('%M'), 'eq', '34'); # should test with < 10
 
 # %p, %P, and %r are not widely implemented,
 # and are possibly unportable (am or AM or a.m., and so on)
 
-cmp_ok($t->strftime('%R'), 'eq', '13:34');    # should test with > 12
+cmp_ok($t->strftime('%R'), 'eq', '13:34');
 
 ok($t->strftime('%S') eq '56'); # should test with < 10
 

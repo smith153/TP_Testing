@@ -19,7 +19,7 @@ use Time::Seconds;
 #because sometimes funny stuff can occur [cpan #93095]
 #https://rt.cpan.org/Ticket/Display.html?id=93095#txn-1482590
 
-my $t = gmtime(1373360831); # 2013-07-09T9:07:11
+my $t = gmtime(1373360831); # 2013-07-09T09:07:11
 
 is($t->sec,               11);
 is($t->second,            11);
@@ -74,23 +74,25 @@ SKIP:{
 }
 
 # %h is locale-dependent
-cmp_ok($t->strftime('%H'), 'eq', '09'); # should test with < 10
+cmp_ok($t->strftime('%H'), 'eq', '09');
+cmp_ok($t->strftime('%k'), 'eq', ' 9');
 
-cmp_ok($t->strftime('%I'), 'eq', '09'); # should test with < 10
+cmp_ok($t->strftime('%I'), 'eq', '09');
+cmp_ok($t->strftime('%l'), 'eq', ' 9');
 cmp_ok($t->strftime('%j'), '==',  190 ); # why ->yday+1 ?
-cmp_ok($t->strftime('%M'), 'eq', '07'); # should test with < 10
+cmp_ok($t->strftime('%M'), 'eq', '07');
 
 # %p, %P, and %r are not widely implemented,
 # and are possibly unportable (am or AM or a.m., and so on)
 
 SKIP: {
   skip "can't strftime %R on Win32 or QNX", 1 if $is_qnx;
-  cmp_ok($t->strftime('%R'), 'eq', '09:07');    # should test with > 12
+  cmp_ok($t->strftime('%R'), 'eq', '09:07');
 }
 
-ok($t->strftime('%S') eq '11'); # should test with < 10
+ok($t->strftime('%S') eq '11');
 
-cmp_ok($t->strftime('%T'), 'eq', '09:07:11'); # < 12 and > 12
+cmp_ok($t->strftime('%T'), 'eq', '09:07:11');
 
 # There are bugs in the implementation of %u in many platforms.
 # (e.g. Linux seems to think, despite the man page, that %u
@@ -135,4 +137,4 @@ SKIP: {
     is    ($lt->strftime("%s"), 1357733231, 'Epoch output is the same with EST');
 }
 
-done_testing(56);
+done_testing(58);
