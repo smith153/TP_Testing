@@ -6,13 +6,13 @@ my $is_vos = ($^O eq 'vos');
 use Time::Piece;
 use Time::Seconds;
 
-my $t = gmtime(951827696); # 2000-02-29T12:34:56
+my $t = gmtime(951831296); # 2000-02-29T13:34:56
 
 is($t->sec,               56);
 is($t->second,            56);
 is($t->min,               34);
 is($t->minute,            34);
-is($t->hour,              12);
+is($t->hour,              13);
 is($t->mday,              29);
 is($t->day_of_month,      29);
 is($t->mon,                2);
@@ -29,16 +29,16 @@ cmp_ok($t->day_of_year, '==',        59);
 
 # In GMT there should be no daylight savings ever.
 cmp_ok($t->isdst, '==', 0);
-cmp_ok($t->epoch, '==', 951827696);
-cmp_ok($t->hms,   'eq',   '12:34:56');
-cmp_ok($t->time,  'eq',   '12:34:56');
+cmp_ok($t->epoch, '==', 951831296);
+cmp_ok($t->hms,   'eq',   '13:34:56');
+cmp_ok($t->time,  'eq',   '13:34:56');
 cmp_ok($t->ymd,   'eq', '2000-02-29');
 cmp_ok($t->date,  'eq', '2000-02-29');
 cmp_ok($t->mdy,   'eq', '02-29-2000');
 cmp_ok($t->dmy,   'eq', '29-02-2000');
-cmp_ok($t->cdate, 'eq', 'Tue Feb 29 12:34:56 2000');
-cmp_ok("$t",      'eq', 'Tue Feb 29 12:34:56 2000');
-cmp_ok($t->datetime, 'eq','2000-02-29T12:34:56');
+cmp_ok($t->cdate, 'eq', 'Tue Feb 29 13:34:56 2000');
+cmp_ok("$t",      'eq', 'Tue Feb 29 13:34:56 2000');
+cmp_ok($t->datetime, 'eq','2000-02-29T13:34:56');
 cmp_ok($t->daylight_savings, '==', 0);
 
 # ->tzoffset?
@@ -73,20 +73,20 @@ cmp_ok($t->strftime('%D'), 'eq', '02/29/00'); # Yech!
 cmp_ok($t->strftime('%e'), 'eq', '29');       # should test with < 10
 
 # %h is locale-dependent
-cmp_ok($t->strftime('%H'), 'eq', '12'); # should test with < 10
+cmp_ok($t->strftime('%H'), 'eq', '13'); # should test with < 10
 
-cmp_ok($t->strftime('%I'), 'eq', '12'); # should test with < 10
+cmp_ok($t->strftime('%I'), 'eq', '01'); # should test with < 10
 cmp_ok($t->strftime('%j'), '==',  60 ); # why ->yday+1 ?
 cmp_ok($t->strftime('%M'), 'eq', '34'); # should test with < 10
 
 # %p, %P, and %r are not widely implemented,
 # and are possibly unportable (am or AM or a.m., and so on)
 
-cmp_ok($t->strftime('%R'), 'eq', '12:34');    # should test with > 12
+cmp_ok($t->strftime('%R'), 'eq', '13:34');    # should test with > 12
 
 ok($t->strftime('%S') eq '56'); # should test with < 10
 
-cmp_ok($t->strftime('%T'), 'eq', '12:34:56'); # < 12 and > 12
+cmp_ok($t->strftime('%T'), 'eq', '13:34:56'); # < 12 and > 12
 
 # There are bugs in the implementation of %u in many platforms.
 # (e.g. Linux seems to think, despite the man page, that %u
@@ -128,12 +128,12 @@ cmp_ok($t->ymd,            'eq', '2000/02/29');
 
 $t->date_separator("-");
 cmp_ok($t->time_separator, 'eq', ':');
-cmp_ok($t->hms("."),       'eq', '12.34.56');
+cmp_ok($t->hms("."),       'eq', '13.34.56');
 
 $t->time_separator(".");
 cmp_ok($t->time_separator, 'eq', '.');
 cmp_ok(Time::Piece::time_separator(), 'eq', '.');
-cmp_ok($t->hms,            'eq', '12.34.56');
+cmp_ok($t->hms,            'eq', '13.34.56');
 
 $t->time_separator(":");
 
@@ -173,7 +173,7 @@ is_deeply (\@nmmonths, \@months);
 cmp_ok(
   $t->datetime(date => '/', T => ' ', time => '-'),
   'eq',
-  "2000/02/29 12-34-56"
+  "2000/02/29 13-34-56"
 );
 
 ok($t->is_leap_year); # should test more with different dates
@@ -213,9 +213,9 @@ is(
 );
 
 cmp_ok(
-  Time::Piece->strptime("2000/02/29 12:34:56", '%Y/%m/%d %H:%M:%S')->epoch,
+  Time::Piece->strptime("2000/02/29 13:34:56", '%Y/%m/%d %H:%M:%S')->epoch,
   '==',
-  951827696
+  951831296
 );
 
 
