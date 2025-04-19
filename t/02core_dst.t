@@ -5,7 +5,7 @@ use Test::More;
 plan skip_all => "DST tests not required for installation"
   unless ( $ENV{AUTOMATED_TESTING} );
 
-my $is_win32 = 0;
+my $is_win32 = ($^O =~ /Win32/);
 my $is_qnx = ($^O eq 'qnx');
 my $is_vos = ($^O eq 'vos');
 my $is_linux = ($^O =~ /linux/);
@@ -66,14 +66,11 @@ cmp_ok($t->week, '==', 28);
 # 20 or 19, is fun, too..as far as I can read SUSv2 it should be 20.)
 cmp_ok($t->strftime('%d'), '==', 9);
 
-SKIP: {
-  skip "can't strftime %D, %R, %T or %e on Win32", 1 if $is_win32;
-  cmp_ok($t->strftime('%D'), 'eq', '07/09/13'); # Yech!
-}
+cmp_ok($t->strftime('%D'), 'eq', '07/09/13'); # Yech!
+
 SKIP:{
-  skip "can't strftime %D, %R, %T or %e on Win32", 1 if $is_win32;
   skip "can't strftime %e on QNX", 1 if $is_qnx;
-  cmp_ok($t->strftime('%e'), 'eq', ' 9');       # should test with < 10
+  cmp_ok($t->strftime('%e'), 'eq', ' 9');
 }
 
 # %h is locale-dependent
@@ -87,16 +84,13 @@ cmp_ok($t->strftime('%M'), 'eq', '07'); # should test with < 10
 # and are possibly unportable (am or AM or a.m., and so on)
 
 SKIP: {
-  skip "can't strftime %R on Win32 or QNX", 1 if $is_win32 or $is_qnx;
+  skip "can't strftime %R on Win32 or QNX", 1 if $is_qnx;
   cmp_ok($t->strftime('%R'), 'eq', '12:07');    # should test with > 12
 }
 
 ok($t->strftime('%S') eq '11'); # should test with < 10
 
-SKIP: {
-  skip "can't strftime %T on Win32", 1 if $is_win32;
-  cmp_ok($t->strftime('%T'), 'eq', '12:07:11'); # < 12 and > 12
-}
+cmp_ok($t->strftime('%T'), 'eq', '12:07:11'); # < 12 and > 12
 
 # There are bugs in the implementation of %u in many platforms.
 # (e.g. Linux seems to think, despite the man page, that %u
@@ -105,7 +99,7 @@ SKIP: {
 cmp_ok($t->strftime('%U'), 'eq', '27'); # Sun cmp Mon
 
 SKIP: {
-    skip "can't strftime %V on Win32 or QNX or VOS", 1 if $is_win32 or $is_qnx or $is_vos;
+    skip "can't strftime %V on Win32 or QNX or VOS", 1 if $is_qnx or $is_vos;
     # is this test really broken on Mac OS? -- rjbs, 2006-02-08
     cmp_ok($t->strftime('%V'), 'eq', '28'); # Sun cmp Mon
 }
@@ -124,7 +118,7 @@ cmp_ok($t->month_last_day, '==', 31); # test more
 
 
 SKIP: {
-	skip "Extra tests for Linux, Windows, BSD only.", 8 if $is_qnx or $is_vos;
+	skip "Extra tests for Linux, BSD only.", 8 unless $is_linux or $is_mac or $is_bsd;
 
     local $ENV{TZ} = "EST5EDT4,M3.2.0/2,M11.1.0/2";
     Time::Piece::_tzset();
