@@ -124,7 +124,7 @@ cmp_ok($t->month_last_day, '==', 31); # test more
 
 
 SKIP: {
-	skip "Extra tests for Linux, BSD only.", 8 unless $is_linux or $is_mac or $is_bsd;
+	skip "Extra tests for Linux, Windows, BSD only.", 8 if $is_qnx or $is_vos;
 
     local $ENV{TZ} = "EST5EDT4,M3.2.0/2,M11.1.0/2";
     Time::Piece::_tzset();
